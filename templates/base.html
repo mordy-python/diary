@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="../static/logos/logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/logos/logo-mac.icns" type="image/x-icon">
+    <title>Diary App</title>
+</head>
+
+<body>
+    <div class="w3-sidebar w3-bar-block sidebar" style="width:15%;">
+        {% if 'username' not in session %}
+            <a href="{{url_for('login')}}" style="margin-left: .2%;" class="w3-bar-item w3-text-teal w3-button w3-round-large w3-hover-teal">Login</a>
+            <a href="{{url_for('signup')}}" style="margin-left: .2%;" class="w3-bar-item w3-text-teal w3-button w3-round-large w3-hover-teal">Sign Up</a>
+        {% else %}
+            <h3 style="margin-left: .2%;" class="w3-bar-item w3-text-teal w3-round-large w3-hover-text-white w3-hover-teal">Diary App</h3>
+            <a href="{{url_for('index')}}" style="margin-left: .2%;" class="w3-bar-item w3-text-teal w3-button w3-round-large w3-hover-teal">View Your Entries</a>
+            <a href="{{url_for('index')}}" style="margin-left: .2%;" class="w3-bar-item w3-text-teal w3-button w3-round-large w3-hover-teal">Account</a>
+            <button onclick="openClick()" style="margin-left: .2%;" class="w3-bar-item w3-text-teal w3-button w3-round-large w3-hover-teal">New Entry</button>
+            <a href="{{url_for('logout')}}" style="margin-left: .2%; position: absolute; bottom: 5%;" class="w3-bar-item w3-button w3-round-large w3-hover-red w3-hover-text-white w3-text-red">Logout</a>
+        {% endif %}
+    </div>
+    
+    <div class="w3-content" style="margin-left: 17%;">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="w3-display-container flash w3-pale-yellow">
+                    <h3>Warning</h3>
+                    <p>{{ message }}</p>
+                    <span onclick="this.parentElement.style.display='none'"class="w3-button w3-display-topright">&times;</span>
+                </div> 
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    <div id="entrybox" class="w3-modal" style="display: none;">
+        <div class="w3-modal-content w3-card w3-animate-left">
+            <div class="w3-container">
+                <span onclick="document.getElementById('entrybox').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <form action="{{url_for('saveEntry')}}" method="POST">
+                    <div>
+                      <div class="w3-section">
+                        <h3 class="w3-text-teal">Title</h3>
+                        <input class="w3-input w3-border w3-border" type="text" placeholder="Enter Title" name="title" required>
+                      </div>
+                      <div class="w3-section">
+                        <h3 class="w3-text-teal">Daily Entry</h3>
+                        <textarea class="w3-input w3-border w3-border" rows="10" placeholder="Write to your hearts content" name="content" required></textarea>
+                      </div>
+                      <input class="w3-teal w3-button w3-margin-bottom w3-margin-top" type="submit" value="Save">
+                    </div>
+                  </form>
+            </div>
+        </div>       
+    </div>
+    <script>
+        function openClick(){
+            entryBox = document.getElementById('entrybox');
+            entryBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

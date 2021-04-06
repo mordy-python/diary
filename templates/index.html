@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Welcome back {{session['username']}}</h1>
+    <div>
+        {% for entry in Myentries %}
+            <div class="w3-card w3-round-large entry">
+                <h3 class="w3-padding">{{entry.title}} <small>&Tab;{{entry.date.strftime("%Y-%m-%d")}}</small></h3>
+                <hr>
+                <pre style="padding:0%">
+                    <p class="w3-margin-left w3-margin-right" style="margin: 0%;">{{entry.content}}</p>
+                </pre>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

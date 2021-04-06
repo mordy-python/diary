@@ -1,0 +1,18 @@
+.flash{
+    margin-top: 1%;
+    padding: 1%;
+}
+textarea{
+    resize: none;
+    outline: none;
+}
+.entry {
+    width: auto;
+    margin-bottom: .2%;
+}
+pre {
+    display: block;
+    margin: 0%;
+    font-family: sans-serif;
+    white-space: pre-wrap;
+}

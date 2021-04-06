@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="w3-margin w3-card-4">
+
+    <div class="w3-container w3-teal">
+        <h1 class="w3-center">Sign Up</h1>
+    </div>
+
+    <form class="w3-container form" action="{{url_for('signup')}}" method="POST">
+        <div>
+          <div class="w3-section">
+            <label for="uname"><b>Username</b></label>
+            <input class="w3-input w3-border w3-border" type="text" placeholder="Enter Username" name="uname" required>
+          </div>
+          <div class="w3-section">
+            <label for="psw"><b>Password</b></label>
+            <input class="w3-input w3-border w3-border" type="password" placeholder="Enter Password" name="psw" required>
+          </div>
+          <div class="w3-section">
+            <label for="psw"><b>Repeat Password</b></label>
+            <input class="w3-input w3-border w3-border" type="password" placeholder="Repeat Password" name="psw2" required>
+          </div>
+          <input class="w3-teal w3-button" type="submit" value="Sign Up">
+          <p class="w3-text-teal w3-margin-bottom">Already have an account? <a href="{{ url_for('logout') }}">Log in here.</a></p>
+        </div>
+      </form>
+
+</div>
+{% endblock content %}
