@@ -4,11 +4,17 @@
     <div>
         {% for entry in Myentries %}
             <div class="w3-card w3-round-large entry">
-                <h3 class="w3-padding">{{entry.title}} <small>&Tab;{{entry.date.strftime("%Y-%m-%d")}}</small></h3>
+                <h3 class="w3-padding">{{entry.title}} <small>{{entry.date.strftime("%Y-%m-%d")}}</small></h3>
                 <hr>
                 <pre style="padding:0%">
                     <p class="w3-margin-left w3-margin-right" style="margin: 0%;">{{entry.content}}</p>
                 </pre>
+                <div class="symbols w3-display-container">
+                        <a href="{{url_for('delete', id=entry._id)}}"><svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#006359">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                            </svg></a>
+                </div>
             </div>
         {% endfor %}
     </div>

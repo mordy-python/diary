@@ -1,5 +1,5 @@
 from datetime import datetime
-from flaskwebgui import FlaskUI
+# from flaskwebgui import FlaskUI
 from tkinter import Tk
 
 import bcrypt
@@ -12,9 +12,9 @@ height = Tk().winfo_screenheight() - 100
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'=b\xe9`\xb8>\x06\x01\x86a\xae\xc3]4\xcd\xa4\x175=\xa6\x8d\xf9\xdc\x0e'
-ui = FlaskUI(app, width=width, height=height)
+# ui = FlaskUI(app, width=width, height=height)
 
-client = MongoClient("mongodb+srv://mordy:<password>@clustermug.phvvx.mongodb.net/chroniclers?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://mordy:python@clustermug.phvvx.mongodb.net/chroniclers?retryWrites=true&w=majority")
 
 db = client.chroniclers
 users = db.users 
@@ -93,8 +93,11 @@ def login():
 def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
-
+@app.route('/delete/<id>')
+def delete(id):
+    entries.find_one_and_delete({'_id':ObjectId(id)})
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    ui.run()
+    app.run(debug=True, port=8000)
+    # ui.run()
