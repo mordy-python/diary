@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = b'=b\xe9`\xb8>\x06\x01\x86a\xae\xc3]4\xcd\xa4\x175=\xa6\x8d\xf9\xdc\x0e'
 # ui = FlaskUI(app, width=width, height=height)
 
-client = MongoClient("mongodb+srv://mordy:python@clustermug.phvvx.mongodb.net/chroniclers?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://mordy:{password}@clustermug.phvvx.mongodb.net/chroniclers?retryWrites=true&w=majority")
 
 db = client.chroniclers
 users = db.users 
